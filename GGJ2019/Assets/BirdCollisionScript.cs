@@ -17,7 +17,7 @@ public class BirdCollisionScript : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Branch":
-                viewAdjust = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 6, gameObject.transform.position.z);
+                viewAdjust = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 4, gameObject.transform.position.z);
                 mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, viewAdjust, 4.0f * Time.deltaTime);
                 break;
 
