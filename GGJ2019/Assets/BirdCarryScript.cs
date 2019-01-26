@@ -6,11 +6,13 @@ public class BirdCarryScript : MonoBehaviour {
 
 
     private bool carrying;
+    GameObject carriedObject;
 
 	// Use this for initialization
 	void Start ()
     {
         carrying = false;
+        carriedObject = null;
 	}
 	
 	// Update is called once per frame
@@ -18,26 +20,30 @@ public class BirdCarryScript : MonoBehaviour {
     {
 		if(Input.GetKeyDown(KeyCode.E))
         {
-            if(carrying)
-            {
-                //DROP CARRIED ITEM
-                carrying = false;
-                Debug.Log("Drop");
-            }
-            if(!carrying)
+            if (!carrying)
             {
                 //ATTEMPT TO PICK UP CARRIED ITEM HERE
                 bool startCarry = AttemptToCarry();
-                if(startCarry)
+                if (startCarry)
                 {
                     carrying = true;
-                    Debug.Log("Started Carrying"); 
+                    Debug.Log("Started Carrying");
                 }
                 else
                 {
                     //TRIGGER CARRY NOT STARTED FEEDBACK
                 }
             }
+
+            else if (carrying)
+            {
+                //DROP CARRIED ITEM
+                carrying = false;
+                carriedObject.SendMessage("SetCarried", false);
+                carriedObject = null;
+                Debug.Log("Drop");
+            }
+            
         }
 	}
 
@@ -66,6 +72,8 @@ public class BirdCarryScript : MonoBehaviour {
         {
             //TODO: ALSO RETURN CLOSEST BABY
             Debug.Log("Pick up");
+            carriedObject = nearestBaby;
+            nearestBaby.SendMessage("SetCarried", true);
             return true;
 
         }
