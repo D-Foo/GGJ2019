@@ -34,7 +34,7 @@ public class BirdCarryScript : MonoBehaviour {
                     //TRIGGER CARRY NOT STARTED FEEDBACK
                 }
             }
-
+                
             else if (carrying)
             {
                 //DROP CARRIED ITEM

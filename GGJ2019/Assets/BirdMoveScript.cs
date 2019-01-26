@@ -7,6 +7,7 @@ public class BirdMoveScript : MonoBehaviour {
     private float cylinderX;
     private float cylinderZ;
     static private float rotAngle;
+    static private float radius;
     private bool hasJumped;
     private bool isFalling;
     Rigidbody birdBody;
@@ -20,12 +21,17 @@ public class BirdMoveScript : MonoBehaviour {
       //  Debug.Log("XZ (" + cylinderX + ", " + cylinderZ + ")");
 #endif
         rotAngle = 0.0f;
+        radius = 5.0f;
         hasJumped = false;
         isFalling = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        //Arrow Key Controls
+
+
 		if(Input.GetKey(KeyCode.LeftArrow))
         {
             rotAngle -= 30.0f * Time.deltaTime;
@@ -42,7 +48,37 @@ public class BirdMoveScript : MonoBehaviour {
 #endif
         }
 
-        gameObject.transform.position = new Vector3(5 * Mathf.Sin(Mathf.Deg2Rad * rotAngle), gameObject.transform.position.y, 5 * -Mathf.Cos(Mathf.Deg2Rad * rotAngle));
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            radius -= 2.0f * Time.deltaTime;
+#if UNITY_EDITOR
+             Debug.Log("IN");
+#endif
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            radius += 2.0f * Time.deltaTime;
+#if UNITY_EDITOR
+             Debug.Log("OUT");
+#endif
+        }
+
+
+
+
+
+
+
+        //Clamp rotation angle and radius
+
+        if(radius < 1.0f)
+        {
+            radius = 1.0f;
+        }
+        else if(radius > 5.0f)
+        {
+            radius = 5.0f;
+        }
 
         if (rotAngle < 0)
         {
@@ -52,12 +88,15 @@ public class BirdMoveScript : MonoBehaviour {
         {
             rotAngle -= 360;
         }
-       
 
-       // Debug.Log("rotAngle: " + rotAngle);
+
+        //Update position
+        gameObject.transform.position = new Vector3(radius * Mathf.Sin(Mathf.Deg2Rad * rotAngle), gameObject.transform.position.y, radius * -Mathf.Cos(Mathf.Deg2Rad * rotAngle));
+
+        // Debug.Log("rotAngle: " + rotAngle);
 
         //Check for isFalling
-        if(hasJumped && birdBody.velocity.y < 0 && !isFalling)
+        if (hasJumped && birdBody.velocity.y < 0 && !isFalling)
         {
             //Debug.Log("Fall trigger");
             isFalling = true;
@@ -78,7 +117,8 @@ public class BirdMoveScript : MonoBehaviour {
           //  Debug.Log("Fall mitigation, velocity: " + birdBody.velocity.y);
         }
 
-        gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Center Cylinder").transform, new Vector3(0, 1, 0));
+        gameObject.transform.LookAt(new Vector3(GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x, this.transform.position.y, GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z));
+
 
 #if UNITY_EDITOR
         //Debug.Log("(" + Mathf.Sin(Mathf.Deg2Rad * rotAngle) + ", " + gameObject.transform.position.y + ", " + -Mathf.Cos(Mathf.Deg2Rad * rotAngle) +  ")");
