@@ -21,7 +21,7 @@ public class CameraMoveScript : MonoBehaviour {
         //Camera thisCam = gameObject.GetComponent<Camera>();
         //gameObject.transform.rotation = Quaternion.Euler(-playerRot, gameObject.transform.rotation.y, gameObject.transform.rotation.z);
   
-        gameObject.transform.position = new Vector3(10 * Mathf.Sin(Mathf.Deg2Rad * playerRot), gameObject.transform.position.y, 10 * -Mathf.Cos(Mathf.Deg2Rad * playerRot));
+        gameObject.transform.position = new Vector3(10 * Mathf.Sin(Mathf.Deg2Rad * playerRot), GameObject.FindGameObjectWithTag("Player").transform.position.y + 2.0f, 10 * -Mathf.Cos(Mathf.Deg2Rad * playerRot));
         gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform, new Vector3(0, 1, 0));
     }
 }

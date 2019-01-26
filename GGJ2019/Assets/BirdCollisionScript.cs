@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BirdCollisionScript : MonoBehaviour
 {
+    private GameObject nearestBabyBird;
+
     private void OnCollisionStay(Collision collision)
     {
         switch (collision.gameObject.name)
@@ -11,6 +13,8 @@ public class BirdCollisionScript : MonoBehaviour
             case "BabyBird":
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    nearestBabyBird = collision.gameObject;
+                    nearestBabyBird.transform.position = gameObject.transform.position;
                     Debug.Log("PICKUP BIRDY");
                 }
                 break;

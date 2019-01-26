@@ -24,9 +24,17 @@ public class BirdMoveScript : MonoBehaviour {
         isFalling = false;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKey(KeyCode.LeftArrow))
+	void Update ()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            gameObject.transform.Translate(new Vector3(0.0f, 0.0f, 1.0f) * Time.deltaTime, Space.World);
+#if UNITY_EDITOR
+            // Debug.Log("AWAY");
+#endif
+        }
+
+        if (Input.GetKey(KeyCode.A))
         {
             rotAngle -= 30.0f * Time.deltaTime;
 #if UNITY_EDITOR
@@ -34,7 +42,7 @@ public class BirdMoveScript : MonoBehaviour {
 #endif
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             rotAngle += 30.0f * Time.deltaTime;
 #if UNITY_EDITOR
@@ -78,7 +86,7 @@ public class BirdMoveScript : MonoBehaviour {
           //  Debug.Log("Fall mitigation, velocity: " + birdBody.velocity.y);
         }
 
-        gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Center Cylinder").transform, new Vector3(0, 1, 0));
+        gameObject.transform.LookAt(new Vector3(GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x, this.transform.position.y, GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z));
 
 #if UNITY_EDITOR
         //Debug.Log("(" + Mathf.Sin(Mathf.Deg2Rad * rotAngle) + ", " + gameObject.transform.position.y + ", " + -Mathf.Cos(Mathf.Deg2Rad * rotAngle) +  ")");
