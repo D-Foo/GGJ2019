@@ -78,6 +78,7 @@ public class BirdMoveScript : MonoBehaviour {
           //  Debug.Log("Fall mitigation, velocity: " + birdBody.velocity.y);
         }
 
+        gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Center Cylinder").transform, new Vector3(0, 1, 0));
 
 #if UNITY_EDITOR
         //Debug.Log("(" + Mathf.Sin(Mathf.Deg2Rad * rotAngle) + ", " + gameObject.transform.position.y + ", " + -Mathf.Cos(Mathf.Deg2Rad * rotAngle) +  ")");
