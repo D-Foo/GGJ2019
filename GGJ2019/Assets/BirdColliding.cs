@@ -34,10 +34,24 @@ public class BirdColliding : MonoBehaviour {
         {
             case "Worm":
                 Debug.Log("WORM");
+                if (!BirdCarryScript.IsMouthCarrying())
+                {
+                    collider.gameObject.SendMessage("SetCarried", true);
+                    BirdCarryScript.StartMouthCarry(collider.gameObject);
+                }
                 break;
 
             case "Baby Bird":
-                Debug.Log("Feed Worm");
+                if (BirdCarryScript.IsMouthCarrying())
+                {
+                    Debug.Log("Feed Worm");
+                    BirdCarryScript.EndMouthCarry();
+                    //TODO: delete worm
+                }
+                else
+                {
+                    Debug.Log("Baby Bird");
+                }
                 break;
 
             case "Player":

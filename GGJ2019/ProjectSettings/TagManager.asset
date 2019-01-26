@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Center Cylinder
   - Baby Bird
+  - Worm
+  - BabyBird
   layers:
   - Default
   - TransparentFX

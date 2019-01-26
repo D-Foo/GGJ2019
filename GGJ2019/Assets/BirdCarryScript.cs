@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class BirdCarryScript : MonoBehaviour {
 
-
-    private bool carrying;
-    GameObject carriedObject;
+    static private bool mouthCarrying;
+    static GameObject mouthCarriedObject;
+    private bool clawCarrying;
+    GameObject clawCarriedObject;
 
 	// Use this for initialization
 	void Start ()
     {
-        carrying = false;
-        carriedObject = null;
+        clawCarrying = false;
+        clawCarriedObject = null;
+        mouthCarrying = false;
+        mouthCarriedObject = null;
 	}
 	
 	// Update is called once per frame
@@ -20,13 +23,13 @@ public class BirdCarryScript : MonoBehaviour {
     {
 		if(Input.GetKeyDown(KeyCode.E))
         {
-            if (!carrying)
+            if (!clawCarrying)
             {
                 //ATTEMPT TO PICK UP CARRIED ITEM HERE
                 bool startCarry = AttemptToCarry();
                 if (startCarry)
                 {
-                    carrying = true;
+                    clawCarrying = true;
                     Debug.Log("Started Carrying");
                 }
                 else
@@ -35,17 +38,33 @@ public class BirdCarryScript : MonoBehaviour {
                 }
             }
                 
-            else if (carrying)
+            else if (clawCarrying)
             {
                 //DROP CARRIED ITEM
-                carrying = false;
-                carriedObject.SendMessage("SetCarried", false);
-                carriedObject = null;
+                clawCarrying = false;
+                clawCarriedObject.SendMessage("SetCarried", false);
+                clawCarriedObject = null;
                 Debug.Log("Drop");
             }
             
         }
 	}
+
+    static public bool IsMouthCarrying()
+    {
+        return mouthCarrying;
+    }
+    static public void StartMouthCarry(GameObject worm)
+    {
+        mouthCarrying = true;
+        mouthCarriedObject = worm;
+    }
+    static public void EndMouthCarry()
+    {
+        mouthCarrying = false;
+        Destroy(mouthCarriedObject);
+    }
+
 
     private bool AttemptToCarry()
     {
@@ -72,7 +91,7 @@ public class BirdCarryScript : MonoBehaviour {
         {
             //TODO: ALSO RETURN CLOSEST BABY
             Debug.Log("Pick up");
-            carriedObject = nearestBaby;
+            clawCarriedObject = nearestBaby;
             nearestBaby.SendMessage("SetCarried", true);
             return true;
 

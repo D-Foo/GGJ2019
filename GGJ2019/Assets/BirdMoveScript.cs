@@ -71,13 +71,13 @@ public class BirdMoveScript : MonoBehaviour {
 
         //Clamp rotation angle and radius
 
-        if(radius < 1.0f)
+        if(radius < 2.0f)
         {
-            radius = 1.0f;
+            radius = 2.0f;
         }
-        else if(radius > 5.0f)
+        else if(radius > 15.0f)
         {
-            radius = 5.0f;
+            radius = 15.0f;
         }
 
         if (rotAngle < 0)

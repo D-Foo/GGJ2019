@@ -22,5 +22,6 @@ public class BabyBirdBehaviour : MonoBehaviour {
     public void SetCarried(bool carried)
     {
         isCarried = carried;
+        
     }
 }
