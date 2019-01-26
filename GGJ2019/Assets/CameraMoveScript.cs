@@ -17,7 +17,7 @@ public class CameraMoveScript : MonoBehaviour {
 	void Update () {
         //float playerRot = GameObject.FindGameObjectWithTag("Player").GetComponent("rotAngle");
         float playerRot = BirdMoveScript.GetRotAngle();
-        Debug.Log("playerRot: " + playerRot);
+       // Debug.Log("playerRot: " + playerRot);
         //Camera thisCam = gameObject.GetComponent<Camera>();
         //gameObject.transform.rotation = Quaternion.Euler(-playerRot, gameObject.transform.rotation.y, gameObject.transform.rotation.z);
   

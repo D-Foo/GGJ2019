@@ -7,16 +7,20 @@ public class BirdMoveScript : MonoBehaviour {
     private float cylinderX;
     private float cylinderZ;
     static private float rotAngle;
+    private bool hasJumped;
     private bool isFalling;
+    Rigidbody birdBody;
     
 	// Use this for initialization
 	void Start () {
         cylinderX = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x;
         cylinderZ = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z;
+        birdBody = gameObject.GetComponent<Rigidbody>();
 #if UNITY_EDITOR
-     Debug.Log("XZ (" + cylinderX + ", " + cylinderZ + ")");
+      //  Debug.Log("XZ (" + cylinderX + ", " + cylinderZ + ")");
 #endif
         rotAngle = 0.0f;
+        hasJumped = false;
         isFalling = false;
     }
 	
@@ -48,14 +52,30 @@ public class BirdMoveScript : MonoBehaviour {
         {
             rotAngle -= 360;
         }
+       
 
-        Debug.Log("rotAngle: " + rotAngle);
+       // Debug.Log("rotAngle: " + rotAngle);
 
-        if(Input.GetKeyDown(KeyCode.Space) && !isFalling)
+        //Check for isFalling
+        if(hasJumped && birdBody.velocity.y < 0 && !isFalling)
         {
+            //Debug.Log("Fall trigger");
             isFalling = true;
-            Rigidbody birdBody = gameObject.GetComponent<Rigidbody>();
-            birdBody.velocity = new Vector3(birdBody.velocity.x, 20, birdBody.velocity.z);
+        }
+
+
+        if(Input.GetKeyDown(KeyCode.Space) && !hasJumped)
+        {
+            hasJumped = true;
+            birdBody.velocity = new Vector3(birdBody.velocity.x, 8.0f, birdBody.velocity.z);
+        }
+
+        //Hold space while falling to slow the fall
+        if(isFalling && Input.GetKey(KeyCode.Space))
+        {
+            
+            birdBody.velocity += new Vector3(0.0f, 7.0f * Time.deltaTime, 0.0f);
+          //  Debug.Log("Fall mitigation, velocity: " + birdBody.velocity.y);
         }
 
 
@@ -66,6 +86,7 @@ public class BirdMoveScript : MonoBehaviour {
 
     public void OnCollisionEnter(Collision collision)
     {
+        hasJumped = false;
         isFalling = false;
     }
 
