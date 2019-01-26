@@ -52,14 +52,14 @@ public class BirdMoveScript : MonoBehaviour {
         {
             radius -= 2.0f * Time.deltaTime;
 #if UNITY_EDITOR
-             Debug.Log("IN");
+            // Debug.Log("IN");
 #endif
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             radius += 2.0f * Time.deltaTime;
 #if UNITY_EDITOR
-             Debug.Log("OUT");
+            // Debug.Log("OUT");
 #endif
         }
 
