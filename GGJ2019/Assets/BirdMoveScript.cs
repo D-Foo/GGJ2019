@@ -92,6 +92,7 @@ public class BirdMoveScript : MonoBehaviour {
 
         //Update position
         gameObject.transform.position = new Vector3(radius * Mathf.Sin(Mathf.Deg2Rad * rotAngle), gameObject.transform.position.y, radius * -Mathf.Cos(Mathf.Deg2Rad * rotAngle));
+     
 
         // Debug.Log("rotAngle: " + rotAngle);
 
@@ -119,7 +120,8 @@ public class BirdMoveScript : MonoBehaviour {
 
         gameObject.transform.LookAt(new Vector3(GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x, this.transform.position.y, GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z));
 
-
+        gameObject.transform.rotation = Quaternion.Euler(0, 90 - rotAngle, -90);
+        Debug.Log("Rotation: (" + transform.rotation.ToString());
 #if UNITY_EDITOR
         //Debug.Log("(" + Mathf.Sin(Mathf.Deg2Rad * rotAngle) + ", " + gameObject.transform.position.y + ", " + -Mathf.Cos(Mathf.Deg2Rad * rotAngle) +  ")");
 #endif
