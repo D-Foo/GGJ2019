@@ -22,6 +22,6 @@ public class CameraMoveScript : MonoBehaviour {
         //gameObject.transform.rotation = Quaternion.Euler(-playerRot, gameObject.transform.rotation.y, gameObject.transform.rotation.z);
   
         gameObject.transform.position = new Vector3(10 * Mathf.Sin(Mathf.Deg2Rad * playerRot), gameObject.transform.position.y, 10 * -Mathf.Cos(Mathf.Deg2Rad * playerRot));
-        gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Center Cylinder").transform, new Vector3(0, 1, 0));
+        gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform, new Vector3(0, 1, 0));
     }
 }
