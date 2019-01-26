@@ -97,7 +97,7 @@ ModelImporter:
     400090: //RootNode
     2100000: 01 - Default
     4300000: BirdmainBod004
-    7400000: Take 001
+    7400000: TakeOff
     9500000: //RootNode
     13700000: BirdmainBod004
   externalObjects: {}
@@ -129,7 +129,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: TakeOff
       takeName: Take 001
       firstFrame: 0
       lastFrame: 40

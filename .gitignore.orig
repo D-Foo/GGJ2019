@@ -1,0 +1,14 @@
+GGJ2019/Library/*
+GGJ2019/Packages
+GGJ2019/Temp
+GGJ2019/GGJ2019.sln
+GGJ2019/.vs
+GGJ2019/Assembly-CSharp.csproj
+GGJ2019/Assembly-CSharp-Editor.csproj
+GGJ2019/obj
+<<<<<<< HEAD
+GGJ2019/Assets/ProCore
+*.dll
+=======
+GGJ2019/Assets/ProCore
+>>>>>>> 11cd65e6bec2e0108a4fe01d974ba821c439daa0
