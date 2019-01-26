@@ -70,10 +70,10 @@ public class BirdMoveScript : MonoBehaviour {
 
 
         //Clamp rotation angle and radius
-
-        if(radius < 2.0f)
+        float minRadius = 7.25f;
+        if(radius < minRadius)
         {
-            radius = 2.0f;
+            radius = minRadius;
         }
         else if(radius > 15.0f)
         {
@@ -102,7 +102,7 @@ public class BirdMoveScript : MonoBehaviour {
             isFalling = true;
         }
 
-
+        //Press Space to Jump
         if(Input.GetKeyDown(KeyCode.Space) && !hasJumped)
         {
             hasJumped = true;
