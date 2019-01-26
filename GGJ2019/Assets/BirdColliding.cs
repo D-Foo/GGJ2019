@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BirdColliding : MonoBehaviour {
 
+
     private bool isCarried;
 
     // Use this for initialization
