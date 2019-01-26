@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5df77c64bb9dc5f4881fa8804b3d42e4
+guid: 57afd5677c967f443893acf57fb53462
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -48,8 +48,7 @@ ModelImporter:
     100084: CATRigTail2
     100086: CATRigTail2 1
     100088: CATRigTailHub004
-    100090: Character001
-    100092: //RootNode
+    100090: //RootNode
     400000: BirdmainBod004
     400002: CATRig2Bone001
     400004: CATRig2Bone001 1
@@ -95,8 +94,7 @@ ModelImporter:
     400084: CATRigTail2
     400086: CATRigTail2 1
     400088: CATRigTailHub004
-    400090: Character001
-    400092: //RootNode
+    400090: //RootNode
     2100000: 01 - Default
     4300000: BirdmainBod004
     7400000: Take 001
@@ -134,7 +132,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 100
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -187,7 +185,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human: []
@@ -204,7 +202,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5df77c64bb9dc5f4881fa8804b3d42e4,
+    type: 3}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
