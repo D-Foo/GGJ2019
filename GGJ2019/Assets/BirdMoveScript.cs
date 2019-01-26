@@ -21,7 +21,7 @@ public class BirdMoveScript : MonoBehaviour {
       //  Debug.Log("XZ (" + cylinderX + ", " + cylinderZ + ")");
 #endif
         rotAngle = 0.0f;
-        radius = 5.0f;
+        radius = 7.0f;
         hasJumped = false;
         isFalling = false;
     }
@@ -134,5 +134,10 @@ public class BirdMoveScript : MonoBehaviour {
     static public float GetRotAngle()
     {
         return rotAngle;
+    }
+
+    public float GetRadius()
+    {
+        return radius;
     }
 }
