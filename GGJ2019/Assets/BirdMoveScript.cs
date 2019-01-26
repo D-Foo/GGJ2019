@@ -21,7 +21,7 @@ public class BirdMoveScript : MonoBehaviour {
       //  Debug.Log("XZ (" + cylinderX + ", " + cylinderZ + ")");
 #endif
         rotAngle = 0.0f;
-        radius = 7.0f;
+        radius = 15.0f;
         hasJumped = false;
         isFalling = false;
     }
@@ -50,14 +50,14 @@ public class BirdMoveScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            radius -= 2.0f * Time.deltaTime;
+            radius -= 5.0f * Time.deltaTime;
 #if UNITY_EDITOR
             // Debug.Log("IN");
 #endif
         }
         if (Input.GetKey(KeyCode.S))
         {
-            radius += 2.0f * Time.deltaTime;
+            radius += 5.0f * Time.deltaTime;
 #if UNITY_EDITOR
             // Debug.Log("OUT");
 #endif
@@ -75,9 +75,9 @@ public class BirdMoveScript : MonoBehaviour {
         {
             radius = minRadius;
         }
-        else if(radius > 15.0f)
+        else if(radius > 35.0f)
         {
-            radius = 15.0f;
+            radius = 35.0f;
         }
 
         if (rotAngle < 0)

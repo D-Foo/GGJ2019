@@ -8,6 +8,7 @@ TagManager:
   - Baby Bird
   - Worm
   - BabyBird
+  - Branch
   layers:
   - Default
   - TransparentFX
