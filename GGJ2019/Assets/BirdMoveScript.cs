@@ -32,7 +32,7 @@ public class BirdMoveScript : MonoBehaviour {
         //Arrow Key Controls
 
 
-		if(Input.GetKey(KeyCode.LeftArrow))
+		if(Input.GetKey(KeyCode.A))
         {
             rotAngle -= 30.0f * Time.deltaTime;
 #if UNITY_EDITOR
@@ -40,7 +40,7 @@ public class BirdMoveScript : MonoBehaviour {
 #endif
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             rotAngle += 30.0f * Time.deltaTime;
 #if UNITY_EDITOR
@@ -48,14 +48,14 @@ public class BirdMoveScript : MonoBehaviour {
 #endif
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             radius -= 2.0f * Time.deltaTime;
 #if UNITY_EDITOR
             // Debug.Log("IN");
 #endif
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
             radius += 2.0f * Time.deltaTime;
 #if UNITY_EDITOR
