@@ -5,6 +5,7 @@ using UnityEngine;
 public class BirdCarryScript : MonoBehaviour {
 
     static private bool mouthCarrying;
+    static private bool isCarryingBaby;
     static GameObject mouthCarriedObject;
     private bool clawCarrying;
     GameObject clawCarriedObject;
@@ -16,7 +17,8 @@ public class BirdCarryScript : MonoBehaviour {
         clawCarriedObject = null;
         mouthCarrying = false;
         mouthCarriedObject = null;
-	}
+        isCarryingBaby = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -53,6 +55,14 @@ public class BirdCarryScript : MonoBehaviour {
     static public bool IsMouthCarrying()
     {
         return mouthCarrying;
+    }
+    static public bool IsCarryingBaby()
+    {
+        return isCarryingBaby;
+    }
+    static public void setIsCarryingBaby(bool input)
+    {
+        isCarryingBaby = input;
     }
     static public void StartMouthCarry(GameObject worm)
     {
