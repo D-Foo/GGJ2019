@@ -78,6 +78,17 @@ public class BirdCarryScript : MonoBehaviour {
         mouthCarrying = false;
         Destroy(mouthCarriedObject);
     }
+    public GameObject GetCarriedBird()
+    {
+        if(isCarryingBaby)
+        {
+            return clawCarriedObject;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 
     private bool AttemptToCarry()
@@ -111,7 +122,7 @@ public class BirdCarryScript : MonoBehaviour {
             nearestBaby.transform.SetParent(GameObject.FindGameObjectWithTag("Bird Head").transform);
             nearestBaby.transform.localPosition = new Vector3(-1.75f, 0.0f, 0.0f);
             nearestBaby.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 75.0f);
-           
+            clawCarriedObject = nearestBaby;
          
             return true;
 
