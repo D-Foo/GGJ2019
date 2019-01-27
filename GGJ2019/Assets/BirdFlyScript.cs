@@ -8,12 +8,14 @@ public class BirdFlyScript : MonoBehaviour {
     BirdMoveScript bms;
     float flightMeter;
     Animator animator;
+    AudioSource wingFlap;
 
 
 	// Use this for initialization
 	void Start () {
         bcs = gameObject.GetComponent<BirdCarryScript>();
         bms = gameObject.GetComponent<BirdMoveScript>();
+        wingFlap = gameObject.GetComponent<AudioSource>();
         animator = gameObject.GetComponent<Animator>();
         flightMeter = 1.35f;
 	}
@@ -29,7 +31,9 @@ public class BirdFlyScript : MonoBehaviour {
                 flightMeter -= Time.deltaTime;
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 550.0f * Time.deltaTime, 0.0f));
                 animator.speed = 3.5f;  //Increase animation speed while flying
-                //Debug.Log("FLIGHT" + flightMeter.ToString());
+                if (wingFlap.isPlaying != true && !bms.IsFalling())
+                    wingFlap.Play();
+                    //Debug.Log("FLIGHT" + flightMeter.ToString());
             }
         }
 	}
