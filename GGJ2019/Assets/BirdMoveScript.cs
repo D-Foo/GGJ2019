@@ -26,7 +26,10 @@ public class BirdMoveScript : MonoBehaviour {
     private bool moveLocked;
     private float flyCountdown;
     private bool takeOffPrep;
-    
+    private bool facingRight; //!movingRight == movingLeft
+    float spinAngle; //For rotating the bird to face left/right
+    float spinSpeed;
+
 	// Use this for initialization
 	void Start () {
         cylinderX = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x;
@@ -50,6 +53,9 @@ public class BirdMoveScript : MonoBehaviour {
         takeOffPrep = false;
         moveLocked = false;
         firstMove = true;
+        facingRight = true;
+        spinAngle = 0.0f;
+        spinSpeed = 300.0f;
     }
 	
 	// Update is called once per frame
@@ -67,6 +73,7 @@ public class BirdMoveScript : MonoBehaviour {
             if (Input.GetKey(KeyCode.A))
             {
                 rotAngle -= 22.5f * Time.deltaTime;
+                facingRight = false;
             }        
 
             if (Input.GetKey(KeyCode.S))
@@ -77,6 +84,7 @@ public class BirdMoveScript : MonoBehaviour {
             if (Input.GetKey(KeyCode.D))
             {
                 rotAngle += 22.5f * Time.deltaTime;
+                facingRight = true;
             }
         }
         else
@@ -124,7 +132,29 @@ public class BirdMoveScript : MonoBehaviour {
             }
         }
 
-
+        //Update spin angle
+        if(facingRight)
+        { 
+            if(spinAngle > 0)
+            {
+                spinAngle -= spinSpeed * Time.deltaTime;
+                if(spinAngle < 0)   //Clamp
+                {
+                    spinAngle = 0;
+                }
+            }
+        }
+        else
+        {
+            if (spinAngle < 180)
+            {
+                spinAngle += spinSpeed * Time.deltaTime;
+                if (spinAngle > 180)   //Clamp
+                {
+                    spinAngle = 180;
+                }
+            }
+        }
 
 
 
@@ -183,7 +213,7 @@ public class BirdMoveScript : MonoBehaviour {
         gameObject.transform.LookAt(new Vector3(GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x, this.transform.position.y, GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z));
 
         //gameObject.transform.rotation = Quaternion.Euler(0, 90 - rotAngle, -90);
-        gameObject.transform.rotation = Quaternion.Euler(0, -rotAngle, 0);
+        gameObject.transform.rotation = Quaternion.Euler(0, -rotAngle + spinAngle, 0);
       //  Debug.Log("Rotation: (" + transform.rotation.ToString());
 #if UNITY_EDITOR
         //Debug.Log("(" + Mathf.Sin(Mathf.Deg2Rad * rotAngle) + ", " + gameObject.transform.position.y + ", " + -Mathf.Cos(Mathf.Deg2Rad * rotAngle) +  ")");
@@ -191,11 +221,11 @@ public class BirdMoveScript : MonoBehaviour {
     }
 
     //TODO: Maybe Delete This
-    public void OnCollisionEnter(Collision collision)
-    {
-        isAirborne = false;
-        isFalling = false;
-    }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    isAirborne = false;
+    //    isFalling = false;
+    //}
 
     static public float GetRotAngle()
     {
