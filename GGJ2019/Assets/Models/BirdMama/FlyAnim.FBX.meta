@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 57afd5677c967f443893acf57fb53462
+guid: 036dd953f2c6e6c40a08afba3e1fee83
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -97,7 +97,7 @@ ModelImporter:
     400090: //RootNode
     2100000: 01 - Default
     4300000: BirdmainBod004
-    7400000: TakeOff
+    7400000: Fly
     9500000: //RootNode
     13700000: BirdmainBod004
   externalObjects: {}
@@ -129,17 +129,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: TakeOff
+      name: Fly
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -185,7 +185,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 2
     human: []
@@ -202,8 +202,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5df77c64bb9dc5f4881fa8804b3d42e4,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
