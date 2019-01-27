@@ -7,34 +7,39 @@ public class BirdFlyScript : MonoBehaviour {
     BirdCarryScript bcs;
     BirdMoveScript bms;
     float flightMeter;
+    Animator animator;
 
 
 	// Use this for initialization
 	void Start () {
         bcs = gameObject.GetComponent<BirdCarryScript>();
         bms = gameObject.GetComponent<BirdMoveScript>();
+        animator = gameObject.GetComponent<Animator>();
         flightMeter = 1.35f;
 	}
 	
 	// Update is called once per frame 
 	void Update ()
     {
+        animator.speed = 1.0f;  //Reset animation speed on update
 		if(Input.GetKey(KeyCode.Space))
         {
-            if (!bms.IsFalling() && flightMeter > 0)
+            if (!bms.IsFalling() && flightMeter > 0 && bms.IsAirborne())
             {
                 flightMeter -= Time.deltaTime;
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 550.0f * Time.deltaTime, 0.0f));
-                Debug.Log("FLIGHT" + flightMeter.ToString());
+                animator.speed = 3.5f;  //Increase animation speed while flying
+               // Debug.Log("FLIGHT" + flightMeter.ToString());
             }
         }
 	}
 
     private void OnCollisionEnter(Collision collision)
     {
-       if(collision.gameObject.tag == "Floor")
+       if(collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Branch")
         {
-            flightMeter = 0.8f;
+            flightMeter = 1.35f;
+            bms.HasLanded();
         }
     }
 }

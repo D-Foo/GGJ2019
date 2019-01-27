@@ -10,6 +10,8 @@ TagManager:
   - BabyBird
   - Branch
   - Floor
+  - Bird Head
+  - Bird Leg
   layers:
   - Default
   - TransparentFX

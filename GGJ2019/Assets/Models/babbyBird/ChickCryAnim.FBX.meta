@@ -1,105 +1,31 @@
 fileFormatVersion: 2
-guid: 9ece168237ac33d4c9f500a2435a70e2
+guid: 6c497791fe568d84f9891791fc8dadf6
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: BirdmainBod004
-    100002: CATRig2Bone001
-    100004: CATRig2Bone001 1
-    100006: CATRig2Bone002
-    100008: CATRig2Bone002 1
-    100010: CATRig2Bone003
-    100012: CATRig2Bone003 1
-    100014: CATRigAnkleBone001
-    100016: CATRigAnkleBone001 1
-    100018: CATRigHead003
-    100020: CATRigHub001
-    100022: CATRigHubShoulder002
-    100024: CATRigLLeg1
-    100026: CATRigLLeg2
-    100028: CATRigLLegAnkle
-    100030: CATRigLLegDigit11
-    100032: CATRigLLegDigit12
-    100034: CATRigLLegDigit21
-    100036: CATRigLLegDigit22
-    100038: CATRigLLegDigit31
-    100040: CATRigLLegDigit32
-    100042: CATRigLLegPlatform
-    100044: CATRigNeck01
-    100046: CATRigNeck02
-    100048: CATRigNeck03
-    100050: CATRigRLeg1
-    100052: CATRigRLeg2
-    100054: CATRigRLegAnkle
-    100056: CATRigRLegDigit11
-    100058: CATRigRLegDigit12
-    100060: CATRigRLegDigit21
-    100062: CATRigRLegDigit22
-    100064: CATRigRLegDigit31
-    100066: CATRigRLegDigit32
-    100068: CATRigRLegPlatform
-    100070: CATRigSpine
-    100072: CATRigSpineBottom
-    100074: CATRigSpineBottom 1
-    100076: CATRigSpineBottom 2
-    100078: CATRigTail1
-    100080: CATRigTail1 1
-    100082: CATRigTail1 2
-    100084: CATRigTail2
-    100086: CATRigTail2 1
-    100088: CATRigTailHub004
-    100090: //RootNode
-    400000: BirdmainBod004
-    400002: CATRig2Bone001
-    400004: CATRig2Bone001 1
-    400006: CATRig2Bone002
-    400008: CATRig2Bone002 1
-    400010: CATRig2Bone003
-    400012: CATRig2Bone003 1
-    400014: CATRigAnkleBone001
-    400016: CATRigAnkleBone001 1
-    400018: CATRigHead003
-    400020: CATRigHub001
-    400022: CATRigHubShoulder002
-    400024: CATRigLLeg1
-    400026: CATRigLLeg2
-    400028: CATRigLLegAnkle
-    400030: CATRigLLegDigit11
-    400032: CATRigLLegDigit12
-    400034: CATRigLLegDigit21
-    400036: CATRigLLegDigit22
-    400038: CATRigLLegDigit31
-    400040: CATRigLLegDigit32
-    400042: CATRigLLegPlatform
-    400044: CATRigNeck01
-    400046: CATRigNeck02
-    400048: CATRigNeck03
-    400050: CATRigRLeg1
-    400052: CATRigRLeg2
-    400054: CATRigRLegAnkle
-    400056: CATRigRLegDigit11
-    400058: CATRigRLegDigit12
-    400060: CATRigRLegDigit21
-    400062: CATRigRLegDigit22
-    400064: CATRigRLegDigit31
-    400066: CATRigRLegDigit32
-    400068: CATRigRLegPlatform
-    400070: CATRigSpine
-    400072: CATRigSpineBottom
-    400074: CATRigSpineBottom 1
-    400076: CATRigSpineBottom 2
-    400078: CATRigTail1
-    400080: CATRigTail1 1
-    400082: CATRigTail1 2
-    400084: CATRigTail2
-    400086: CATRigTail2 1
-    400088: CATRigTailHub004
-    400090: //RootNode
+    100000: BabyChick
+    100002: CATRigHub001
+    100004: CATRigRwing1
+    100006: CATRigTail1
+    100008: CATRigTail1 1
+    100010: CATRigTail1 2
+    100012: CATRigTail1 3
+    100014: CATRigTail2
+    100016: //RootNode
+    400000: BabyChick
+    400002: CATRigHub001
+    400004: CATRigRwing1
+    400006: CATRigTail1
+    400008: CATRigTail1 1
+    400010: CATRigTail1 2
+    400012: CATRigTail1 3
+    400014: CATRigTail2
+    400016: //RootNode
     2100000: 01 - Default
-    4300000: BirdmainBod004
-    7400000: Hop
+    4300000: BabyChick
+    7400000: Cry
     9500000: //RootNode
-    13700000: BirdmainBod004
+    13700000: BabyChick
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -129,17 +55,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Hop
+      name: Cry
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 37
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

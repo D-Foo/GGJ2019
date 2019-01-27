@@ -15,10 +15,17 @@ public class BirdMoveScript : MonoBehaviour {
     private float cylinderZ;
     static private float rotAngle;
     static private float radius;
-    private bool hasJumped;
+    private bool isAirborne;
     private bool isFalling;
     Rigidbody birdBody;
     Animator animator;
+    private bool firstMove; //Used for checking whether to play slow first hop or not
+    private float moveLockTimer;
+    private float firstHopMoveLockTime;
+    private float takeOffMoveLockTime;
+    private bool moveLocked;
+    private float flyCountdown;
+    private bool takeOffPrep;
     
 	// Use this for initialization
 	void Start () {
@@ -30,12 +37,19 @@ public class BirdMoveScript : MonoBehaviour {
 #endif
         rotAngle = 0.0f;
         radius = 15.0f;
-        hasJumped = false;
+       
+        isAirborne = false;
         isFalling = false;
 
         //Fix for animation not playing
         animator = gameObject.GetComponent<Animator>();
-
+        moveLockTimer = 0.0f;
+        firstHopMoveLockTime = 0.45f;
+        takeOffMoveLockTime = 0.4f;
+        flyCountdown = takeOffMoveLockTime;
+        takeOffPrep = false;
+        moveLocked = false;
+        firstMove = true;
     }
 	
 	// Update is called once per frame
@@ -43,39 +57,72 @@ public class BirdMoveScript : MonoBehaviour {
 
         //Arrow Key Controls
 
-
-		if(Input.GetKey(KeyCode.A))
+        if(!moveLocked)
         {
-            rotAngle -= 22.5f * Time.deltaTime;
-#if UNITY_EDITOR
-           // Debug.Log("LEFT");
-#endif
+            if (Input.GetKey(KeyCode.W))
+            {
+                radius -= 5.0f * Time.deltaTime;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                rotAngle -= 22.5f * Time.deltaTime;
+            }        
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                radius += 5.0f * Time.deltaTime;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                rotAngle += 22.5f * Time.deltaTime;
+            }
+        }
+        else
+        {
+            moveLockTimer -= Time.deltaTime;
+            if(moveLockTimer <= 0)
+            {
+                moveLocked = false;
+                moveLockTimer = 0.0f;
+
+                //If was move locked due to taking off
+                if (takeOffPrep)
+                {
+                    isAirborne = true;
+                    birdBody.velocity = new Vector3(birdBody.velocity.x, 8.0f, birdBody.velocity.z);
+                    takeOffPrep = false;
+                }
+            }
         }
 
-        if (Input.GetKey(KeyCode.D))
+        //Start playing hop anim and lock player in place for a short amount of time
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            rotAngle += 22.5f * Time.deltaTime;
-#if UNITY_EDITOR
-           // Debug.Log("RIGHT");
-#endif
+            if (!isAirborne && !takeOffPrep)
+            {
+                if (firstMove)
+                {
+                    firstMove = false;
+                    Debug.Log("First Move");
+                    moveLocked = true;
+                    moveLockTimer = firstHopMoveLockTime;
+                    //TODO: LOCK PLAYER
+                    animator.Play("Hop");
+                }
+            }
         }
 
-        if (Input.GetKey(KeyCode.W))
+        //If at any point neither of the WASD keys are held down and not taking off or flying reset first hop
+        if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            radius -= 5.0f * Time.deltaTime;
-#if UNITY_EDITOR
-            // Debug.Log("IN");
-#endif
+            if (!takeOffPrep && !isAirborne)
+            {
+                firstMove = true;
+                animator.Play("Idle");
+            }
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            radius += 5.0f * Time.deltaTime;
-#if UNITY_EDITOR
-            // Debug.Log("OUT");
-#endif
-        }
-
-
 
 
 
@@ -104,29 +151,31 @@ public class BirdMoveScript : MonoBehaviour {
 
         //Update position
         gameObject.transform.position = new Vector3(radius * Mathf.Sin(Mathf.Deg2Rad * rotAngle), gameObject.transform.position.y, radius * -Mathf.Cos(Mathf.Deg2Rad * rotAngle));
-        Debug.Log("Player Y: " + transform.position.y.ToString());
 
-        // Debug.Log("rotAngle: " + rotAngle);
+        
+
+
 
         //Check for isFalling
-        if (hasJumped && birdBody.velocity.y < 0 && !isFalling)
+        if (isAirborne && birdBody.velocity.y < 0 && !isFalling)
         {
             //Debug.Log("Fall trigger");
             isFalling = true;
         }
 
         //Press Space to Jump
-        if(Input.GetKeyDown(KeyCode.Space) && !hasJumped)
+        if(Input.GetKeyDown(KeyCode.Space) && !isAirborne && !takeOffPrep)
         {
-            hasJumped = true;
-            birdBody.velocity = new Vector3(birdBody.velocity.x, 8.0f, birdBody.velocity.z);
+            Debug.Log("Start Jump");
+            takeOffPrep = true;
             animator.Play("TakeOff");
+            moveLocked = true;
+            moveLockTimer = takeOffMoveLockTime;
         }
 
         //Hold space while falling to slow the fall
         if(isFalling && Input.GetKey(KeyCode.Space))
         {
-            
             birdBody.velocity += new Vector3(0.0f, 7.0f * Time.deltaTime, 0.0f);
           //  Debug.Log("Fall mitigation, velocity: " + birdBody.velocity.y);
         }
@@ -135,15 +184,16 @@ public class BirdMoveScript : MonoBehaviour {
 
         //gameObject.transform.rotation = Quaternion.Euler(0, 90 - rotAngle, -90);
         gameObject.transform.rotation = Quaternion.Euler(0, -rotAngle, 0);
-        Debug.Log("Rotation: (" + transform.rotation.ToString());
+      //  Debug.Log("Rotation: (" + transform.rotation.ToString());
 #if UNITY_EDITOR
         //Debug.Log("(" + Mathf.Sin(Mathf.Deg2Rad * rotAngle) + ", " + gameObject.transform.position.y + ", " + -Mathf.Cos(Mathf.Deg2Rad * rotAngle) +  ")");
 #endif
     }
 
+    //TODO: Maybe Delete This
     public void OnCollisionEnter(Collision collision)
     {
-        hasJumped = false;
+        isAirborne = false;
         isFalling = false;
     }
 
@@ -160,6 +210,20 @@ public class BirdMoveScript : MonoBehaviour {
     public bool IsFalling()
     {
         return isFalling;
+    }
+
+    public bool IsAirborne()
+    {
+        return isAirborne;
+    }
+
+    public void HasLanded()
+    {
+        isAirborne = false;
+        if(!firstMove)
+        {
+            animator.Play("FastHop");
+        }
     }
 }
 

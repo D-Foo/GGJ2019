@@ -47,6 +47,7 @@ public class BirdColliding : MonoBehaviour {
                 {
                     Debug.Log("Feed Worm");
                     BirdCarryScript.EndMouthCarry();
+                    collider.gameObject.SendMessage("GetFed");
                     //TODO: delete worm
                 }
                 else

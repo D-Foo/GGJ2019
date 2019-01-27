@@ -5,10 +5,12 @@ using UnityEngine;
 public class BabyBirdBehaviour : MonoBehaviour {
 
     private bool isCarried;
+    private bool isFed;
 
 	// Use this for initialization
 	void Start () {
         isCarried = false;
+        isFed = false;
 	}
 	
 	// Update is called once per frame
@@ -19,9 +21,18 @@ public class BabyBirdBehaviour : MonoBehaviour {
         }
 	}
 
+    //TODO: Fix this logic
     public void SetCarried(bool carried)
     {
-        isCarried = carried;
-        
+        if (isFed)
+        {
+            isCarried = carried;
+        }
+    }
+
+    public void GetFed()
+    {
+        isFed = true;
+        GetComponent<Animator>().Play("Idle");
     }
 }
