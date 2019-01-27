@@ -24,12 +24,12 @@ public class BirdFlyScript : MonoBehaviour {
         animator.speed = 1.0f;  //Reset animation speed on update
 		if(Input.GetKey(KeyCode.Space))
         {
-            if (!bms.IsFalling() && flightMeter > 0 && bms.IsAirborne())
+            if (!bms.IsFalling() && flightMeter > 0 && bms.IsAirborne() && !BirdCarryScript.IsCarryingBaby())
             {
                 flightMeter -= Time.deltaTime;
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 550.0f * Time.deltaTime, 0.0f));
                 animator.speed = 3.5f;  //Increase animation speed while flying
-                Debug.Log("FLIGHT" + flightMeter.ToString());
+                //Debug.Log("FLIGHT" + flightMeter.ToString());
             }
         }
 	}

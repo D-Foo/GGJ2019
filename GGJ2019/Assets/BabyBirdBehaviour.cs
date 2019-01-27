@@ -17,7 +17,7 @@ public class BabyBirdBehaviour : MonoBehaviour {
 	void Update () {
 		if(isCarried)
         {
-            transform.position = GameObject.FindGameObjectWithTag("Player").transform.position; //TODO ADD CLAW OFFSET
+            //transform.position = GameObject.FindGameObjectWithTag("Player").transform.position; //TODO ADD CLAW OFFSET
         }
 	}
 
@@ -27,6 +27,13 @@ public class BabyBirdBehaviour : MonoBehaviour {
         if (isFed)
         {
             isCarried = carried;
+            if(!carried)
+            {
+                transform.parent = null;
+                transform.localPosition = new Vector3(0.0f, 0.5f, 0.0f) + GameObject.FindGameObjectWithTag("Player").transform.position;
+                transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                
+            }
         }
     }
 
@@ -35,4 +42,5 @@ public class BabyBirdBehaviour : MonoBehaviour {
         isFed = true;
         GetComponent<Animator>().Play("Idle");
     }
+
 }

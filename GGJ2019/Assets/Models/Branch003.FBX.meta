@@ -1,21 +1,15 @@
 fileFormatVersion: 2
-guid: f1194bf8993c7024f81255e40f9285de
+guid: 38f85f05e7449e24fbd672cfecf6074c
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pSphere1
-    100004: pSphere2
     400000: //RootNode
-    400002: pSphere1
-    400004: pSphere2
-    2100000: lambert2
-    2300000: pSphere1
-    2300002: pSphere2
-    3300000: pSphere1
-    3300002: pSphere2
-    4300000: pSphere1
-    4300002: pSphere2
+    2100000: Branch0
+    2100002: Branch1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Branch002
   externalObjects: {}
   materials:
     importMaterials: 1

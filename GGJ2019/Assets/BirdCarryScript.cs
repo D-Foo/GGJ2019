@@ -7,8 +7,12 @@ public class BirdCarryScript : MonoBehaviour {
     static private bool mouthCarrying;
     static private bool isCarryingBaby;
     static GameObject mouthCarriedObject;
-    private bool clawCarrying;
+    static private bool clawCarrying;
     GameObject clawCarriedObject;
+
+    public float localX = -1.07f;
+    public float localY = -0.22f;
+    public float localZ = -0.11f;
 
 	// Use this for initialization
 	void Start ()
@@ -58,7 +62,7 @@ public class BirdCarryScript : MonoBehaviour {
     }
     static public bool IsCarryingBaby()
     {
-        return isCarryingBaby;
+        return clawCarrying;
     }
     static public void setIsCarryingBaby(bool input)
     {
@@ -78,7 +82,7 @@ public class BirdCarryScript : MonoBehaviour {
 
     private bool AttemptToCarry()
     {
-        float pickUpRange = 1.0f;
+        float pickUpRange = 3.5f;
         GameObject[] babies;
         babies = GameObject.FindGameObjectsWithTag("Baby Bird");
         GameObject nearestBaby = null;
@@ -103,6 +107,12 @@ public class BirdCarryScript : MonoBehaviour {
             Debug.Log("Pick up");
             clawCarriedObject = nearestBaby;
             nearestBaby.SendMessage("SetCarried", true);
+            //Attach to parent and apply local position transform
+            nearestBaby.transform.SetParent(GameObject.FindGameObjectWithTag("Bird Head").transform);
+            nearestBaby.transform.localPosition = new Vector3(-1.75f, 0.0f, 0.0f);
+            nearestBaby.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 75.0f);
+           
+         
             return true;
 
         }

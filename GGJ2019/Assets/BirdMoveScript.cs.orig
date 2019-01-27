@@ -29,19 +29,17 @@ public class BirdMoveScript : MonoBehaviour {
     private CardinalMoveDir playerMoveDir;
     float spinAngle; //For rotating the bird to face left/right
     float spinSpeed;
-    BirdCarryScript bcs;
 
 	// Use this for initialization
 	void Start () {
         cylinderX = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x;
         cylinderZ = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z;
         birdBody = gameObject.GetComponent<Rigidbody>();
-        bcs = gameObject.GetComponent<BirdCarryScript>();
 #if UNITY_EDITOR
       //  Debug.Log("XZ (" + cylinderX + ", " + cylinderZ + ")");
 #endif
-        rotAngle = 155.0f;
-        radius = 42.5f;
+        rotAngle = 0.0f;
+        radius = 15.0f;
        
         isAirborne = false;
         isFalling = false;
@@ -75,9 +73,15 @@ public class BirdMoveScript : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.A))
             {
-                rotAngle -= 20.0f * Time.deltaTime;
+<<<<<<< HEAD
+                rotAngle -= 22.5f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.west;
             }
+=======
+                rotAngle -= 20.0f * Time.deltaTime;
+                facingRight = false;
+            }        
+>>>>>>> 39dd4ec91b29b70a7c5679d08abf10bb1bffe8a4
 
             if (Input.GetKey(KeyCode.S))
             {
@@ -87,8 +91,13 @@ public class BirdMoveScript : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.D))
             {
-                rotAngle += 20.0f * Time.deltaTime;
+<<<<<<< HEAD
+                rotAngle += 22.5f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.east;
+=======
+                rotAngle += 20.0f * Time.deltaTime;
+                facingRight = true;
+>>>>>>> 39dd4ec91b29b70a7c5679d08abf10bb1bffe8a4
             }
         }
         else
@@ -183,14 +192,13 @@ public class BirdMoveScript : MonoBehaviour {
 
         //Clamp rotation angle and radius
         float minRadius = 7.25f;
-        float maxRadius = 55.0f;
         if(radius < minRadius)
         {
             radius = minRadius;
         }
-        else if(radius > maxRadius)
+        else if(radius > 35.0f)
         {
-            radius = maxRadius;
+            radius = 35.0f;
         }
 
         if (rotAngle < 0)
