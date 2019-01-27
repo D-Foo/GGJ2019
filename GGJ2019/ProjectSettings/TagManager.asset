@@ -9,6 +9,7 @@ TagManager:
   - Worm
   - BabyBird
   - Branch
+  - Floor
   layers:
   - Default
   - TransparentFX

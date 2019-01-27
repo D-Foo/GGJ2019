@@ -22,8 +22,12 @@ public class WormBehaviour : MonoBehaviour {
 
     public void SetCarried(bool carried)
     {
+        Debug.Log("Start Carrying");
         isCarried = carried;
-        transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
-        transform.localPosition = new Vector3(2.7f, 0.8f, 0);
+        transform.SetParent(GameObject.FindGameObjectWithTag("Bird Head").transform);
+        transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+        transform.localPosition = new Vector3(0.2f, 1.0f, 0.0f);
+       // GameObject.tag("Bird Head")
+       // transform.localPosition = new Vector3(3.0f, 3.3f, 0);
     }
 }

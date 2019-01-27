@@ -18,6 +18,7 @@ public class BirdMoveScript : MonoBehaviour {
     private bool hasJumped;
     private bool isFalling;
     Rigidbody birdBody;
+    Animator animator;
     
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public class BirdMoveScript : MonoBehaviour {
         isFalling = false;
 
         //Fix for animation not playing
-        gameObject.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+        animator = gameObject.GetComponent<Animator>();
 
     }
 	
@@ -45,7 +46,7 @@ public class BirdMoveScript : MonoBehaviour {
 
 		if(Input.GetKey(KeyCode.A))
         {
-            rotAngle -= 30.0f * Time.deltaTime;
+            rotAngle -= 22.5f * Time.deltaTime;
 #if UNITY_EDITOR
            // Debug.Log("LEFT");
 #endif
@@ -53,7 +54,7 @@ public class BirdMoveScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.D))
         {
-            rotAngle += 30.0f * Time.deltaTime;
+            rotAngle += 22.5f * Time.deltaTime;
 #if UNITY_EDITOR
            // Debug.Log("RIGHT");
 #endif
@@ -103,7 +104,7 @@ public class BirdMoveScript : MonoBehaviour {
 
         //Update position
         gameObject.transform.position = new Vector3(radius * Mathf.Sin(Mathf.Deg2Rad * rotAngle), gameObject.transform.position.y, radius * -Mathf.Cos(Mathf.Deg2Rad * rotAngle));
-     
+        Debug.Log("Player Y: " + transform.position.y.ToString());
 
         // Debug.Log("rotAngle: " + rotAngle);
 
@@ -119,6 +120,7 @@ public class BirdMoveScript : MonoBehaviour {
         {
             hasJumped = true;
             birdBody.velocity = new Vector3(birdBody.velocity.x, 8.0f, birdBody.velocity.z);
+            animator.Play("TakeOff");
         }
 
         //Hold space while falling to slow the fall
