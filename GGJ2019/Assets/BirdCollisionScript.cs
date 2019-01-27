@@ -8,14 +8,14 @@ public class BirdCollisionScript : MonoBehaviour
     private Vector3 viewAdjust;
     private AudioSource logHop;
     private AudioSource grassHop;
-    private BirdMoveScript bms;
-    private BirdCarryScript bcs;
+    BirdMoveScript bms;
+    BirdCarryScript bcs;
 
     private void Start()
     {
         AudioSource[] audioSource = GetComponents<AudioSource>();
         bms = GetComponent<BirdMoveScript>();
-        bcs = GetComponent<BirdCarryScript>();
+        bcs = gameObject.GetComponent<BirdCarryScript>();
         grassHop = audioSource[1];
         logHop = audioSource[2];
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -51,7 +51,7 @@ public class BirdCollisionScript : MonoBehaviour
                 Debug.Log("TRIGGER BIRDHOUSE");
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    if (BirdCarryScript.IsCarryingBaby())
+                    if (bcs.IsCarryingBaby())
                     {
 
                     }
