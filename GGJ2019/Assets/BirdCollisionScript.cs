@@ -22,7 +22,7 @@ public class BirdCollisionScript : MonoBehaviour
                 break;
 
             default:
-                viewAdjust = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2, gameObject.transform.position.z);
+                viewAdjust = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z);
                 mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, viewAdjust, 2.0f * Time.deltaTime);
                 break;
         }

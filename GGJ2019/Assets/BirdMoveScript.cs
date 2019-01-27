@@ -47,7 +47,7 @@ public class BirdMoveScript : MonoBehaviour {
         //Fix for animation not playing
         animator = gameObject.GetComponent<Animator>();
         moveLockTimer = 0.0f;
-        firstHopMoveLockTime = 0.45f;
+        firstHopMoveLockTime = 0.25f;
         takeOffMoveLockTime = 0.4f;
         flyCountdown = takeOffMoveLockTime;
         takeOffPrep = false;
@@ -73,7 +73,7 @@ public class BirdMoveScript : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.A))
             {
-                rotAngle -= 22.5f * Time.deltaTime;
+                rotAngle -= 20.0f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.west;
             }
 
@@ -85,7 +85,7 @@ public class BirdMoveScript : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.D))
             {
-                rotAngle += 22.5f * Time.deltaTime;
+                rotAngle += 20.0f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.east;
             }
         }
