@@ -188,7 +188,7 @@ public class BirdMoveScript : MonoBehaviour {
 
 
         //Clamp rotation angle and radius
-        float minRadius = 8.0f;
+        float minRadius = 10.0f;
         float maxRadius = 55.0f;
         if(radius < minRadius)
         {
