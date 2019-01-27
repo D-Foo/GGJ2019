@@ -10,6 +10,7 @@ public class BirdCollisionScript : MonoBehaviour
     private AudioSource grassHop;
     BirdMoveScript bms;
     BirdCarryScript bcs;
+    GameObject carriedBird;
 
     private void Start()
     {
@@ -51,10 +52,9 @@ public class BirdCollisionScript : MonoBehaviour
                 Debug.Log("TRIGGER BIRDHOUSE");
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    if (bcs.IsCarryingBaby())
-                    {
-
-                    }
+                    carriedBird = bcs.GetCarriedBird();
+                    Destroy(carriedBird);
+                    Debug.Log("Destroy bird");
                 }
                 break;
 
