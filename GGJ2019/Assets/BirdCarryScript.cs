@@ -7,7 +7,7 @@ public class BirdCarryScript : MonoBehaviour {
     static private bool mouthCarrying;
     static private bool isCarryingBaby;
     static GameObject mouthCarriedObject;
-    static private bool clawCarrying;
+    private bool clawCarrying;
     GameObject clawCarriedObject;
 
     public float localX = -1.07f;
@@ -60,7 +60,7 @@ public class BirdCarryScript : MonoBehaviour {
     {
         return mouthCarrying;
     }
-    static public bool IsCarryingBaby()
+    public bool IsCarryingBaby()
     {
         return clawCarrying;
     }
