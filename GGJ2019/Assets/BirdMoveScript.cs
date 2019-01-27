@@ -5,7 +5,7 @@ using UnityEngine;
 public class BirdMoveScript : MonoBehaviour {
 
 
-
+    private enum CardinalMoveDir { north, east, south, west };
 
 
 
@@ -26,7 +26,7 @@ public class BirdMoveScript : MonoBehaviour {
     private bool moveLocked;
     private float flyCountdown;
     private bool takeOffPrep;
-    private bool facingRight; //!movingRight == movingLeft
+    private CardinalMoveDir playerMoveDir;
     float spinAngle; //For rotating the bird to face left/right
     float spinSpeed;
 
@@ -53,7 +53,7 @@ public class BirdMoveScript : MonoBehaviour {
         takeOffPrep = false;
         moveLocked = false;
         firstMove = true;
-        facingRight = true;
+        playerMoveDir = CardinalMoveDir.east;
         spinAngle = 0.0f;
         spinSpeed = 300.0f;
     }
@@ -68,23 +68,25 @@ public class BirdMoveScript : MonoBehaviour {
             if (Input.GetKey(KeyCode.W))
             {
                 radius -= 5.0f * Time.deltaTime;
+                playerMoveDir = CardinalMoveDir.north;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
                 rotAngle -= 22.5f * Time.deltaTime;
-                facingRight = false;
-            }        
+                playerMoveDir = CardinalMoveDir.west;
+            }
 
             if (Input.GetKey(KeyCode.S))
             {
                 radius += 5.0f * Time.deltaTime;
+                playerMoveDir = CardinalMoveDir.south;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
                 rotAngle += 22.5f * Time.deltaTime;
-                facingRight = true;
+                playerMoveDir = CardinalMoveDir.east;
             }
         }
         else
@@ -132,29 +134,48 @@ public class BirdMoveScript : MonoBehaviour {
             }
         }
 
+
+
         //Update spin angle
-        if(facingRight)
-        { 
-            if(spinAngle > 0)
-            {
-                spinAngle -= spinSpeed * Time.deltaTime;
-                if(spinAngle < 0)   //Clamp
-                {
-                    spinAngle = 0;
-                }
-            }
-        }
-        else
+        int targetAngle = 0;
+        switch (playerMoveDir)
         {
-            if (spinAngle < 180)
-            {
-                spinAngle += spinSpeed * Time.deltaTime;
-                if (spinAngle > 180)   //Clamp
+            case CardinalMoveDir.north:
+                //Logic for fast spins
+                if(spinAngle < 90 && spinAngle >= 0)
                 {
-                    spinAngle = 180;
+                    spinAngle += 360;
                 }
-            }
+                targetAngle = 270;
+                break;
+            case CardinalMoveDir.east:
+                if (spinAngle >= 360)
+                {
+                    spinAngle -= 360;
+                }
+                //Logic for fast spins
+                if (spinAngle >= 270 && spinAngle < 360)
+                {
+                    spinAngle -= 360;
+                }
+                targetAngle = 0;
+                break;
+            case CardinalMoveDir.west:
+                if (spinAngle >= 360)
+                {
+                    spinAngle -= 360;
+                }
+                targetAngle = 180;
+                break;
+            case CardinalMoveDir.south:
+                if (spinAngle >= 360)
+                {
+                    spinAngle -= 360;
+                }
+                targetAngle = 90;
+                break;
         }
+        UpdateSpinAngle(targetAngle);
 
 
 
@@ -227,6 +248,38 @@ public class BirdMoveScript : MonoBehaviour {
     //    isFalling = false;
     //}
 
+   private void UpdateSpinAngle(int targetAngle)
+    {
+        if (spinAngle != targetAngle)
+        {
+            if (spinAngle > targetAngle)
+            {
+                //Update
+                spinAngle -= spinSpeed * Time.deltaTime;
+                //Clamp
+                if (spinAngle < targetAngle)
+                {
+                    spinAngle = targetAngle;
+                }
+            }
+            else
+            {
+                if (spinAngle < targetAngle)
+                {
+                    //Update
+                    spinAngle += spinSpeed * Time.deltaTime;
+                    //Clamp
+                    if (spinAngle > targetAngle)
+                    {
+                        spinAngle = targetAngle;
+                    }
+                }
+            }
+        }
+    }
+
+
+    //Getters + Setters
     static public float GetRotAngle()
     {
         return rotAngle;
@@ -250,6 +303,7 @@ public class BirdMoveScript : MonoBehaviour {
     public void HasLanded()
     {
         isAirborne = false;
+        isFalling = false;
         if(!firstMove)
         {
             animator.Play("FastHop");
