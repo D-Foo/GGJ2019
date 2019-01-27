@@ -30,9 +30,10 @@ public class BirdMoveScript : MonoBehaviour {
     float spinAngle; //For rotating the bird to face left/right
     float spinSpeed;
     BirdCarryScript bcs;
+    private bool isMoving = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         cylinderX = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.x;
         cylinderZ = GameObject.FindGameObjectWithTag("Center Cylinder").transform.position.z;
         birdBody = gameObject.GetComponent<Rigidbody>();
@@ -71,24 +72,29 @@ public class BirdMoveScript : MonoBehaviour {
             {
                 radius -= 5.0f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.north;
+                isMoving = true;
             }
-
-            if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A))
             {
                 rotAngle -= 20.0f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.west;
+                isMoving = true;
             }
-
-            if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S))
             {
                 radius += 5.0f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.south;
+                isMoving = true;
             }
-
-            if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 rotAngle += 20.0f * Time.deltaTime;
                 playerMoveDir = CardinalMoveDir.east;
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
             }
         }
         else
@@ -296,6 +302,11 @@ public class BirdMoveScript : MonoBehaviour {
     public bool IsFalling()
     {
         return isFalling;
+    }
+
+    public bool IsMoving()
+    {
+        return isMoving;
     }
 
     public bool IsAirborne()
