@@ -12,6 +12,7 @@ TagManager:
   - Floor
   - Bird Head
   - Bird Leg
+  - BirdHouse
   layers:
   - Default
   - TransparentFX
