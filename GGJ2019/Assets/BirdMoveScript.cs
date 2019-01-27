@@ -154,4 +154,10 @@ public class BirdMoveScript : MonoBehaviour {
     {
         return radius;
     }
+
+    public bool IsFalling()
+    {
+        return isFalling;
+    }
 }
+
