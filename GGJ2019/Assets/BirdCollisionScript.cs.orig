@@ -51,9 +51,14 @@ public class BirdCollisionScript : MonoBehaviour
                 Debug.Log("TRIGGER BIRDHOUSE");
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    if (bcs.IsCarryingBaby())
+<<<<<<< HEAD
+                    if (BirdCarryScript.IsCarryingBaby())
                     {
 
+=======
+                    if (bcs.IsCarryingBaby())
+                    {
+>>>>>>> fb89946f969a7f80f3a9aa877547e654de839378
                     }
                 }
                 break;
