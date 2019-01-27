@@ -53,6 +53,7 @@ public class BirdCollisionScript : MonoBehaviour
                 {
                     if (bcs.IsCarryingBaby())
                     {
+                       
                     }
                 }
                 break;
