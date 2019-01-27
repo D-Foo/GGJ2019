@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class BirdMoveScript : MonoBehaviour {
 
+
+
+
+
+
+
+
     private float cylinderX;
     private float cylinderZ;
     static private float rotAngle;

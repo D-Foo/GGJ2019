@@ -16,12 +16,14 @@ public class WormBehaviour : MonoBehaviour {
     {
         if (isCarried)
         {
-            transform.position = GameObject.FindGameObjectWithTag("Player").transform.position; //TODO ADD MOUTH OFFSET
+            //transform.position = GameObject.FindGameObjectWithTag("Player").transform.position; //TODO ADD MOUTH OFFSET
         }
     }
 
     public void SetCarried(bool carried)
     {
         isCarried = carried;
+        transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
+        transform.localPosition = new Vector3(2.7f, 0.8f, 0);
     }
 }
